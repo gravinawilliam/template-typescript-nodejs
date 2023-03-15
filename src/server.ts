@@ -1,2 +1,3 @@
 const start = () => {};
-start();
+
+start()
