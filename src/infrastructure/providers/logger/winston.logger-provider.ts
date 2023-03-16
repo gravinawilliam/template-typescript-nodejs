@@ -8,6 +8,10 @@ import {
   SendLogErrorLoggerProviderDTO
 } from '@contracts/providers/logger/send-log-error-logger.provider';
 import {
+  ISendLogHttpLoggerProvider,
+  SendLogHttpLoggerProviderDTO
+} from '@contracts/providers/logger/send-log-http-logger.provider';
+import {
   ISendLogInfoLoggerProvider,
   SendLogInfoLoggerProviderDTO
 } from '@contracts/providers/logger/send-log-info-logger.provider';
@@ -62,7 +66,9 @@ const CONSOLE_FORMAT = format.combine(
   )
 );
 
-export class WinstonLoggerProvider implements ISendLogErrorLoggerProvider, ISendLogInfoLoggerProvider {
+export class WinstonLoggerProvider
+  implements ISendLogErrorLoggerProvider, ISendLogInfoLoggerProvider, ISendLogHttpLoggerProvider
+{
   private readonly level: string = this.environment.IS_DEVELOPMENT ? LevelName.DEBUG : LevelName.INFO;
 
   private readonly logsFolder: string = this.environment.LOGS_FOLDER;
@@ -88,6 +94,10 @@ export class WinstonLoggerProvider implements ISendLogErrorLoggerProvider, ISend
     } else {
       this.logger.error(`${emoji.get('x')} ${this.getValue(parameters.value)}`);
     }
+  }
+
+  public sendLogHttp(parameters: SendLogHttpLoggerProviderDTO.Parameters): SendLogHttpLoggerProviderDTO.Result {
+    this.logger.http(`${emoji.get('computer')} ${this.getValue(parameters.message)}`);
   }
 
   private configureAndGetLogger = (): WinstonLoggerType => {
