@@ -1,7 +1,10 @@
 import { makeInfrastructure } from '@factories/infrastructure.factory';
 
-const start = () => {
+import { Framework } from '@main/frameworks';
+
+const start = async () => {
   makeInfrastructure();
+  await Framework.initializeExpress();
 };
 
 start();
