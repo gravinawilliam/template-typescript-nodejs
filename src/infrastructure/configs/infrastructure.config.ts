@@ -1,5 +1,3 @@
-import { readPackageSync } from 'read-pkg';
-
 import {
   getEnvironmentNumber,
   getEnvironmentString
@@ -33,7 +31,7 @@ export const GLOBAL_CONFIG = {
     defaultValue: 'template-name',
     key: 'APP_NAME'
   }),
-  APP_VERSION: readPackageSync().version,
+  APP_VERSION: '0.0.0',
   APP_PORT: getEnvironmentNumber({
     defaultValue: 2222,
     key: 'APP_PORT'

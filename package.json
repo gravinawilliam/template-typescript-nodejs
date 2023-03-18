@@ -8,6 +8,7 @@
     "node": "18.15.0"
   },
   "scripts": {
+    "build": "tsup src",
     "check:format": "prettier --check .",
     "check:lint": "eslint . --ext .js,.ts --color",
     "check:spelling": "cspell \"{README.md,TODO.md,.github/*.md,src/**/*.ts,**/*.md*}\"",
@@ -25,7 +26,8 @@
     "prisma:studio": "prisma studio",
     "prisma:format": "prisma format",
     "reset-hard": "git clean -dfx && git reset --hard && pnpm install",
-    "start:dev": "tsx watch src/server.ts ",
+    "start:dev": "tsx watch src/server.ts",
+    "start:prod": "node ./dist/server.js",
     "test": "jest --colors --no-cache --passWithNoTests --detectOpenHandles --runInBand",
     "test:coverage": "jest --colors --no-cache --passWithNoTests --detectOpenHandles --runInBand --coverage --silent",
     "test:watch": "jest --colors --passWithNoTests --detectOpenHandles --runInBand --watch --verbose false",
@@ -44,7 +46,6 @@
     "morgan": "^1.10.0",
     "node-emoji": "^1.11.0",
     "read-pkg": "^7.1.0",
-    "tsx": "^3.12.5",
     "winston": "^3.8.2",
     "winston-daily-rotate-file": "^4.7.1"
   },
@@ -107,9 +108,11 @@
     "prisma": "^4.11.0",
     "standard-version": "^9.5.0",
     "ts-jest": "^29.0.5",
+    "tsup": "^6.6.3",
+    "tsx": "^3.12.5",
     "typescript": "^4.9.5"
   },
   "prisma": {
-    "schema": "src/infrastructure/database/prisma/schema.prisma"
+    "schema": "./prisma/schema.prisma"
   }
 }
