@@ -1,3 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 
-export const prisma = new PrismaClient();
+import { GLOBAL_CONFIG } from '@external/configs/infrastructure.config';
+
+export const prisma = new PrismaClient({
+  log: GLOBAL_CONFIG.IS_PRODUCTION ? [] : ['query']
+});
